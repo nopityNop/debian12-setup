@@ -11,7 +11,6 @@ run_system_update() {
     apt install -y unattended-upgrades apt-listchanges
     check_status "Installing unattended-upgrades"
     
-    # Configure unattended-upgrades for security updates
     echo 'Unattended-Upgrade::Origins-Pattern {
         "origin=Debian,codename=${distro_codename},label=Debian-Security";
     };
@@ -19,7 +18,6 @@ run_system_update() {
     Unattended-Upgrade::MinimalSteps "true";
     Unattended-Upgrade::Remove-Unused-Dependencies "true";' > /etc/apt/apt.conf.d/50unattended-upgrades
     
-    # Enable automatic updates
     echo 'APT::Periodic::Update-Package-Lists "1";
 APT::Periodic::Unattended-Upgrade "1";
 APT::Periodic::Download-Upgradeable-Packages "1";
@@ -27,7 +25,6 @@ APT::Periodic::AutocleanInterval "7";' > /etc/apt/apt.conf.d/20auto-upgrades
     
     check_status "Configuring unattended-upgrades"
     
-    # Enable the unattended-upgrades service
     systemctl enable unattended-upgrades
     systemctl start unattended-upgrades
     check_status "Starting unattended-upgrades service"
