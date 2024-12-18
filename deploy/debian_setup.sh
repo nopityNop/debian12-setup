@@ -46,7 +46,7 @@ fi
 run_system_update || exit 1
 install_basic_tools || exit 1
 run_user_setup || exit 1
-setup_security || exit 1
+run_security_setup || exit 1
 
 echo "----------------------------------------"
 echo "Setup completed successfully!"
