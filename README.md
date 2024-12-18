@@ -7,10 +7,10 @@ Automated setup script for Debian 12 that:
 - Sets up UFW firewall with security rules
 - Installs and configures unattended-upgrades
 
-## Install
+## Quick Install
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/YOUR_USERNAME/debian-setup/main/install.sh | sudo bash
+curl -sSL https://raw.githubusercontent.com/nopityNop/debian12-setup/main/install.sh | sudo bash
 ```
 
 ## Features
