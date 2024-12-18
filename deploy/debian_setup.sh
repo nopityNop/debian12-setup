@@ -25,7 +25,6 @@ check_status() {
     fi
 }
 
-# Source all modules
 source "$SCRIPT_DIR/modules/setup_wizard.sh"
 source "$SCRIPT_DIR/modules/system_update.sh"
 source "$SCRIPT_DIR/modules/user_setup.sh"
@@ -35,7 +34,6 @@ source "$SCRIPT_DIR/modules/basic_tools.sh"
 echo "Starting Debian 12 setup (v${VERSION})..."
 echo "----------------------------------------"
 
-# Run setup steps
 run_setup_wizard || exit 1
 run_system_update || exit 1
 install_basic_tools || exit 1

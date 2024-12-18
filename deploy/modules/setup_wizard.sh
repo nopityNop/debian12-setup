@@ -13,11 +13,6 @@ setup_wizard() {
     echo "Setting timezone to: $TIMEZONE"
     echo
 
-    read -p "Enter hostname [debian-server]: " USER_HOSTNAME
-    HOSTNAME=${USER_HOSTNAME:-"debian-server"}
-    echo "Setting hostname to: $HOSTNAME"
-    echo
-
     while true; do
         read -p "Enter username to create: " USERNAME
         if [[ -z "$USERNAME" ]]; then
@@ -73,7 +68,6 @@ setup_wizard() {
 
 # System Settings
 TIMEZONE="$TIMEZONE"
-HOSTNAME="$HOSTNAME"
 LOCALE="en_US.UTF-8"
 
 # User Settings
@@ -103,7 +97,7 @@ EXTRA_PACKAGES=(
 
 # Update Settings
 ENABLE_AUTOMATIC_UPDATES=true
-UPDATE_LEVEL="security"  # Options: security, all
+UPDATE_LEVEL="security"
 EOL
 
     echo
@@ -115,11 +109,6 @@ EOL
 validate_settings() {
     if ! timedatectl list-timezones | grep -q "^${TIMEZONE}$"; then
         echo "Error: Invalid timezone: ${TIMEZONE}"
-        exit 1
-    fi
-
-    if [[ ! "$HOSTNAME" =~ ^[a-zA-Z0-9]([a-zA-Z0-9-])*[a-zA-Z0-9]$ ]]; then
-        echo "Error: Invalid hostname format: ${HOSTNAME}"
         exit 1
     fi
 

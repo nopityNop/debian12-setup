@@ -3,21 +3,18 @@
 install_basic_tools() {
     echo "=== Installing Basic Tools ==="
     
-    # Read tools from settings.conf
     source "$(dirname "$0")/../config/settings.conf"
     
     if [ -z "$BASIC_TOOLS" ]; then
         echo "Error: BASIC_TOOLS not defined in settings.conf"
         return 1
-    }
+    fi
     
-    # Update package list
     apt-get update || {
         echo "Error: Failed to update package list"
         return 1
     }
     
-    # Install each tool
     for tool in $BASIC_TOOLS; do
         echo "Installing $tool..."
         apt-get install -y "$tool" || {
