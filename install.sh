@@ -14,6 +14,7 @@ apt update
 apt install -y curl unzip
 
 TEMP_DIR=$(mktemp -d)
+trap 'rm -rf "$TEMP_DIR"' EXIT
 cd "$TEMP_DIR" || exit 1
 
 echo "Downloading setup scripts..."
@@ -25,6 +26,3 @@ chmod +x debian_setup.sh
 chmod +x modules/*.sh
 
 ./debian_setup.sh
-
-cd /
-rm -rf "$TEMP_DIR"
