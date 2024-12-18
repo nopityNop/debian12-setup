@@ -10,7 +10,7 @@ Automated setup script for Debian 12 that:
 ## Quick Install
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/nopityNop/debian12-setup/main/install.sh | sudo bash
+wget https://raw.githubusercontent.com/nopityNop/debian12-setup/main/install.sh && chmod +x install.sh && sudo ./install.sh
 ```
 
 ## Features

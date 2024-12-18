@@ -25,21 +25,22 @@ check_status() {
     fi
 }
 
-for module in "${SCRIPT_DIR}/modules/"*.sh; do
-    if [ -f "$module" ]; then
-        source "$module"
-        check_status "Loading module $(basename "$module")"
-    fi
-done
+# Source all modules
+source "$SCRIPT_DIR/modules/setup_wizard.sh"
+source "$SCRIPT_DIR/modules/system_update.sh"
+source "$SCRIPT_DIR/modules/user_setup.sh"
+source "$SCRIPT_DIR/modules/security_setup.sh"
+source "$SCRIPT_DIR/modules/basic_tools.sh"
 
 echo "Starting Debian 12 setup (v${VERSION})..."
 echo "----------------------------------------"
 
-setup_wizard
-check_status "Setup wizard"
-
-validate_settings
-check_status "Settings validation"
+# Run setup steps
+run_setup_wizard || exit 1
+run_system_update || exit 1
+install_basic_tools || exit 1
+setup_user || exit 1
+setup_security || exit 1
 
 if [ -f "${SCRIPT_DIR}/config/settings.conf" ]; then
     source "${SCRIPT_DIR}/config/settings.conf"
@@ -47,24 +48,6 @@ else
     echo "Error: settings.conf not found"
     exit 1
 fi
-
-run_system_update
-check_status "System update"
-
-run_user_setup
-check_status "User setup"
-
-run_basic_tools
-check_status "Basic tools installation"
-
-run_security_setup
-check_status "Security setup"
-
-run_user_config
-check_status "User configuration"
-
-run_cleanup
-check_status "System cleanup"
 
 echo "----------------------------------------"
 echo "Setup completed successfully!"
