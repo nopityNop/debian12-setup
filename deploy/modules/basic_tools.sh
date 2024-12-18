@@ -3,8 +3,6 @@
 install_basic_tools() {
     echo "=== Installing Basic Tools ==="
     
-    source "$(dirname "$0")/../config/settings.conf"
-    
     if [ -z "$BASIC_TOOLS" ]; then
         echo "Error: BASIC_TOOLS not defined in settings.conf"
         return 1

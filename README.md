@@ -10,8 +10,10 @@ Automated setup script for Debian 12 that:
 ## Quick Install
 
 ```bash
-wget https://raw.githubusercontent.com/nopityNop/debian12-setup/main/install.sh && chmod +x install.sh && sudo ./install.sh
+wget https://raw.githubusercontent.com/nopityNop/debian12-setup/<sha>/install.sh && chmod +x install.sh && sudo ./install.sh
 ```
+
+Replace `<sha>` with the latest commit SHA.
 
 ## Features
 

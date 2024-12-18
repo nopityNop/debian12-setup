@@ -35,10 +35,6 @@ echo "Starting Debian 12 setup (v${VERSION})..."
 echo "----------------------------------------"
 
 setup_wizard || exit 1
-run_system_update || exit 1
-install_basic_tools || exit 1
-setup_user || exit 1
-setup_security || exit 1
 
 if [ -f "${SCRIPT_DIR}/config/settings.conf" ]; then
     source "${SCRIPT_DIR}/config/settings.conf"
@@ -46,6 +42,11 @@ else
     echo "Error: settings.conf not found"
     exit 1
 fi
+
+run_system_update || exit 1
+install_basic_tools || exit 1
+setup_user || exit 1
+setup_security || exit 1
 
 echo "----------------------------------------"
 echo "Setup completed successfully!"
