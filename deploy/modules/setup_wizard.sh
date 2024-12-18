@@ -5,14 +5,6 @@ setup_wizard() {
     echo "Please provide the following information:"
     echo
 
-    echo "Available timezones:"
-    timedatectl list-timezones | grep "America/" | sort
-    echo
-    read -p "Enter timezone [America/Los_Angeles]: " USER_TIMEZONE
-    TIMEZONE=${USER_TIMEZONE:-"America/Los_Angeles"}
-    echo "Setting timezone to: $TIMEZONE"
-    echo
-
     while true; do
         read -p "Enter username to create: " USERNAME
         if [[ -z "$USERNAME" ]]; then
@@ -66,8 +58,6 @@ setup_wizard() {
     cat > "${SCRIPT_DIR}/config/settings.conf" << EOL
 # Debian 12 Setup Configuration
 
-# System Settings
-TIMEZONE="$TIMEZONE"
 LOCALE="en_US.UTF-8"
 
 # User Settings
@@ -95,11 +85,6 @@ EOL
 }
 
 validate_settings() {
-    if ! timedatectl list-timezones | grep -q "^${TIMEZONE}$"; then
-        echo "Error: Invalid timezone: ${TIMEZONE}"
-        exit 1
-    fi
-
     if [[ -n "$SSH_PUBLIC_KEY" && ! "$SSH_PUBLIC_KEY" =~ ^ssh-rsa[[:space:]] ]]; then
         echo "Error: Invalid SSH key format"
         exit 1
