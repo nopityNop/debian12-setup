@@ -34,7 +34,7 @@ source "$SCRIPT_DIR/modules/basic_tools.sh"
 echo "Starting Debian 12 setup (v${VERSION})..."
 echo "----------------------------------------"
 
-run_setup_wizard || exit 1
+setup_wizard || exit 1
 run_system_update || exit 1
 install_basic_tools || exit 1
 setup_user || exit 1
