@@ -81,19 +81,7 @@ SSH_PORT=22
 DISABLE_ROOT_SSH=true
 DISABLE_PASSWORD_AUTH=true
 
-# Package Settings
-EXTRA_PACKAGES=(
-    "vim"
-    "curl"
-    "wget"
-    "htop"
-    "tmux"
-    "git"
-    "zip"
-    "unzip"
-    "net-tools"
-    "sudo"
-)
+BASIC_TOOLS="vim htop tmux git curl wget net-tools ufw unattended-upgrades python3 python3-pip perl"
 
 # Update Settings
 ENABLE_AUTOMATIC_UPDATES=true
